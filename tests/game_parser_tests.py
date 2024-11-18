@@ -14,6 +14,7 @@ from app import models
 from app.common.game_parser import GameParser
 
 class GameParserTests(unittest.TestCase):
+    app.app_context()
     def setUp(self):
         app.config['TESTING'] = True
         app.config['WTF_CSRF_ENABLED'] = False

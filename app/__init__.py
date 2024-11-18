@@ -10,7 +10,13 @@ app = Flask(__name__)
 api = Api(app)
 app.config.from_object('config')
 db = SQLAlchemy(app)
-limiter = Limiter(app, key_func=get_remote_address)
+#limiter = Limiter(app, key_func=get_remote_address)
+limiter = Limiter(
+    get_remote_address,
+    app=app,
+    default_limits=["200 per day", "50 per hour"],
+    storage_uri="memory://",
+)
 
 # import models
 from app.common import models
